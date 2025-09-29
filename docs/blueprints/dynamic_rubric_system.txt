@@ -1,0 +1,214 @@
+# Dynamic Rubric System - Self-Modifying Performance Criteria
+# Adaptive multi-dimensional evaluation framework
+
+rubric_metadata:
+  name: "AdaptivePerformanceRubric"
+  version: "2.1.0"
+  schema_evolution_enabled: true
+  backward_compatibility: true
+
+# Core Performance Principles with Adaptive Weights
+core_principles:
+  efficiency_optimization:
+    current_weight: 0.25
+    adaptive_range: [0.15, 0.35]
+    weight_momentum: 0.85
+    adaptation_sensitivity: 0.03
+    
+    metrics:
+      execution_time:
+        measurement_unit: "milliseconds"
+        target_range: [10, 100]
+        optimization_direction: "minimize"
+        weight: 0.4
+        
+      resource_utilization:
+        measurement_unit: "percentage"
+        target_range: [60, 85]
+        optimization_direction: "optimize"
+        weight: 0.35
+        
+      task_completion_rate:
+        measurement_unit: "percentage"
+        target_range: [85, 100]
+        optimization_direction: "maximize"
+        weight: 0.25
+
+  learning_velocity:
+    current_weight: 0.20
+    adaptive_range: [0.10, 0.30]
+    weight_momentum: 0.90
+    adaptation_sensitivity: 0.05
+    
+    metrics:
+      improvement_rate_per_iteration:
+        measurement_unit: "delta_score"
+        target_range: [0.01, 0.1]
+        optimization_direction: "maximize"
+        weight: 0.4
+        
+      knowledge_retention_score:
+        measurement_unit: "percentage"
+        target_range: [80, 95]
+        optimization_direction: "maximize"
+        weight: 0.35
+        
+      pattern_recognition_accuracy:
+        measurement_unit: "f1_score"
+        target_range: [0.8, 0.95]
+        optimization_direction: "maximize"
+        weight: 0.25
+
+  collaborative_synergy:
+    current_weight: 0.20
+    adaptive_range: [0.15, 0.25]
+    weight_momentum: 0.80
+    adaptation_sensitivity: 0.02
+    
+    metrics:
+      inter_agent_communication_efficiency:
+        measurement_unit: "bits_per_second"
+        target_range: [1000000, 10000000]
+        optimization_direction: "maximize"
+        weight: 0.4
+        
+      shared_resource_optimization:
+        measurement_unit: "efficiency_ratio"
+        target_range: [1.2, 2.0]
+        optimization_direction: "maximize"
+        weight: 0.35
+        
+      collective_problem_solving_score:
+        measurement_unit: "normalized_score"
+        target_range: [0.7, 0.95]
+        optimization_direction: "maximize"
+        weight: 0.25
+
+  adaptive_resilience:
+    current_weight: 0.15
+    adaptive_range: [0.10, 0.25]
+    weight_momentum: 0.88
+    adaptation_sensitivity: 0.04
+    
+    metrics:
+      error_recovery_time:
+        measurement_unit: "milliseconds"
+        target_range: [50, 500]
+        optimization_direction: "minimize"
+        weight: 0.4
+        
+      failure_prediction_accuracy:
+        measurement_unit: "precision_recall_f1"
+        target_range: [0.75, 0.92]
+        optimization_direction: "maximize"
+        weight: 0.35
+        
+      system_stability_index:
+        measurement_unit: "variance_coefficient"
+        target_range: [0.05, 0.15]
+        optimization_direction: "minimize"
+        weight: 0.25
+
+  innovation_capacity:
+    current_weight: 0.20
+    adaptive_range: [0.10, 0.30]
+    weight_momentum: 0.75
+    adaptation_sensitivity: 0.06
+    
+    metrics:
+      novel_solution_generation:
+        measurement_unit: "solutions_per_hour"
+        target_range: [0.5, 5.0]
+        optimization_direction: "maximize"
+        weight: 0.4
+        
+      breakthrough_frequency:
+        measurement_unit: "breakthroughs_per_1000_iterations"
+        target_range: [1, 10]
+        optimization_direction: "maximize"
+        weight: 0.35
+        
+      creative_problem_solving_score:
+        measurement_unit: "novelty_usefulness_product"
+        target_range: [0.6, 0.9]
+        optimization_direction: "maximize"
+        weight: 0.25
+
+# Rubric Evolution Mechanics
+evolution_parameters:
+  adaptation_frequency: 50  # iterations between weight adjustments
+  weight_adjustment_rate: 0.05
+  principle_mutation_probability: 0.1
+  new_principle_emergence_threshold: 0.8
+  principle_extinction_threshold: 0.05
+  
+  weight_adaptation_algorithms:
+    gradient_descent:
+      learning_rate: 0.01
+      momentum: 0.9
+      weight_decay: 0.0001
+      
+    evolutionary_strategy:
+      population_size: 10
+      mutation_strength: 0.02
+      selection_pressure: 0.7
+      
+    bayesian_optimization:
+      acquisition_function: "expected_improvement"
+      kernel: "matern_5_2"
+      exploration_weight: 0.1
+
+# Dynamic Principle Management
+principle_lifecycle:
+  emergence_conditions:
+    performance_gap_detection: 0.15
+    correlation_discovery_threshold: 0.8
+    statistical_significance_level: 0.05
+    validation_period: 100  # iterations
+    
+  maturation_process:
+    incubation_weight: 0.05
+    growth_rate: 1.2
+    stability_requirement: 25  # consistent iterations
+    full_integration_threshold: 0.10
+    
+  extinction_triggers:
+    redundancy_coefficient: 0.95
+    performance_contribution_minimum: 0.02
+    negative_impact_threshold: -0.05
+    grace_period: 75  # iterations
+
+# Meta-Evaluation Framework
+meta_rubric:
+  rubric_performance_metrics:
+    prediction_accuracy: 0.0
+    adaptation_speed: 0.0
+    stability_maintenance: 0.0
+    emergence_facilitation: 0.0
+    
+  self_improvement_targets:
+    convergence_time_reduction: 0.1  # 10% faster
+    prediction_accuracy_increase: 0.05  # 5% better
+    false_positive_reduction: 0.03  # 3% fewer
+    adaptability_enhancement: 0.08  # 8% more responsive
+
+# Integration Hooks
+external_interfaces:
+  performance_data_ingestion:
+    format: "json_stream"
+    update_frequency: "real_time"
+    batch_processing: true
+    
+  weight_export_api:
+    endpoint: "/api/v1/rubric/weights"
+    format: "json"
+    authentication: "api_key"
+    
+  evolution_event_stream:
+    protocol: "websocket"
+    events: ["weight_change", "principle_emergence", "principle_extinction"]
+    
+  external_optimization_hooks:
+    pre_adaptation_callback: "validate_constraints"
+    post_adaptation_callback: "broadcast_changes"
+    emergency_override: "human_intervention_protocol"

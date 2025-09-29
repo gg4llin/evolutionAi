@@ -1,0 +1,90 @@
+observability:
+  rubric_management:
+    source_spec: "../docs/blueprints/dynamic_rubric_system.txt"
+    schema_version: "2.1.0"
+    adaptive_principles:
+      efficiency_optimization:
+        current_weight: 0.25
+        adaptive_range: [0.15, 0.35]
+        key_metrics:
+          execution_time:
+            target_range: [10, 100]
+            optimization_direction: "minimize"
+          resource_utilization:
+            target_range: [60, 85]
+            optimization_direction: "optimize"
+          task_completion_rate:
+            target_range: [85, 100]
+            optimization_direction: "maximize"
+      learning_velocity:
+        current_weight: 0.20
+        adaptive_range: [0.10, 0.30]
+        key_metrics:
+          improvement_rate_per_iteration:
+            target_range: [0.01, 0.1]
+            optimization_direction: "maximize"
+          knowledge_retention_score:
+            target_range: [80, 95]
+            optimization_direction: "maximize"
+          pattern_recognition_accuracy:
+            target_range: [0.8, 0.95]
+            optimization_direction: "maximize"
+      collaborative_synergy:
+        current_weight: 0.20
+        adaptive_range: [0.15, 0.25]
+        key_metrics:
+          inter_agent_communication_efficiency:
+            target_range: [1000000, 10000000]
+            optimization_direction: "maximize"
+          shared_resource_optimization:
+            target_range: [1.2, 2.0]
+            optimization_direction: "maximize"
+          collective_problem_solving_score:
+            target_range: [0.7, 0.95]
+            optimization_direction: "maximize"
+      adaptive_resilience:
+        current_weight: 0.15
+        adaptive_range: [0.10, 0.25]
+        key_metrics:
+          error_recovery_time:
+            target_range: [50, 500]
+            optimization_direction: "minimize"
+          failure_prediction_accuracy:
+            target_range: [0.75, 0.92]
+            optimization_direction: "maximize"
+          system_stability_index:
+            target_range: [0.05, 0.15]
+            optimization_direction: "minimize"
+      innovation_capacity:
+        current_weight: 0.20
+        adaptive_range: [0.10, 0.30]
+        key_metrics:
+          novel_solution_generation:
+            target_range: [0.5, 5.0]
+            optimization_direction: "maximize"
+          breakthrough_frequency:
+            target_range: [1, 10]
+            optimization_direction: "maximize"
+          creative_problem_solving_score:
+            target_range: [0.6, 0.9]
+            optimization_direction: "maximize"
+  metrics_engine:
+    source_spec: "../docs/blueprints/performance_metrics_system.txt"
+    name: "PerformanceAnalyticsEngine"
+    real_time_processing: true
+    retention_policy: "30_days_detailed_6_months_aggregated"
+    individual_indicators:
+      task_success_rate:
+        window: [10, 50, 200]
+        target_range: [0.8, 1.0]
+      execution_efficiency:
+        benchmark: "theoretical_optimal"
+        calculation_method: "harmonic_mean"
+      learning_curve_slope:
+        smoothing_algorithm: "exponential_moving_average"
+        alpha: 0.3
+      collaboration_score:
+        components:
+          communication_effectiveness: 0.4
+          resource_sharing_efficiency: 0.3
+          conflict_resolution_success: 0.3

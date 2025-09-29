@@ -1,0 +1,124 @@
+# Tadpole Metadata Judgement System
+# Continuous learning scaffold for egg revision and spawning oversight
+
+judgement_metadata:
+  name: "TadpoleJudgementGrid"
+  version: "1.0.0"
+  integration_points:
+    - "dynamic_rubric_system.txt#core_principles"
+    - "agent_spawning_framework.txt#learning_feedback_pipeline"
+    - "data_persistence_state_management.txt#state_architecture.population_state"
+  primary_objectives:
+    - "harvest_worker_metadata"
+    - "derive_principle_scores"
+    - "author_egg_revision_guidance"
+
+# Metadata Ingestion Layer
+metadata_pipeline:
+  sources:
+    worker_status_events:
+      transport: "inter_system_communication.txt#performance_metrics"
+      schema_reference: "performance_metrics_system.txt#individual_metrics"
+      capture_frequency: "real_time"
+    mesh_observability:
+      transport: "inter_system_communication.txt#mesh_coordination"
+      enrichment: "mesh_networking_protocol.txt#tadpole_mesh_operations"
+      capture_frequency: "every_5_seconds"
+  preprocessing:
+    normalization:
+      metric_scaling: "min_max_0_1"
+      outlier_strategy: "robust_z_score_clip"
+    feature_derivation:
+      sliding_window: [5, 25, 100]
+      derivative_features: ["learning_velocity", "resilience_delta"]
+    persistence_hooks:
+      write_targets:
+        - "population_state.judgement_snapshots"
+        - "agent_state.metadata_diary"
+      retention_policy: "90_days_detailed_1_year_summary"
+
+# Principle Scoring Engine
+principle_scoring:
+  rubric_reference: "dynamic_rubric_system.txt#core_principles"
+  scoring_windows:
+    micro: 5
+    macro: 25
+    meta: 100
+  weighting_strategy: "rubric_weighted_composite"
+  specialization_modifiers:
+    optimizer:
+      efficiency_optimization: 1.2
+      adaptive_resilience: 1.1
+    explorer:
+      innovation_capacity: 1.3
+      learning_velocity: 1.15
+    coordinator:
+      collaborative_synergy: 1.25
+    analyst:
+      learning_velocity: 1.1
+      innovation_capacity: 1.05
+  anomaly_detection:
+    technique: "bayesian_change_point"
+    alert_threshold: 0.2  # probability mass shift
+    escalation_channel: "system_events.judgement_alerts"
+
+# Dynamic Judgement Ledger
+judgement_ledger:
+  scoring_entries:
+    fields:
+      - "worker_id"
+      - "specialization"
+      - "principle_scores"
+      - "composite_score"
+      - "observed_anomalies"
+      - "recommended_adjustments"
+    reconciliation:
+      frequency: "per_micro_cycle"
+      authority: "RecursiveMetaOptimizer"
+      verification: "practical_byzantine_fault_tolerance"
+  access_policies:
+    writers: ["main_engine", "judgement_daemon"]
+    readers: ["AdaptiveAgentGPT", "optimization_coordinator"]
+    audit_trail: "security_authentication_framework.txt#audit_controls"
+
+# Egg Revision Workflow
+egg_revision_workflow:
+  trigger_conditions:
+    - name: "principle_drift"
+      threshold: 0.15  # deviation from target
+      evaluation_window: 25
+    - name: "specialization_failure"
+      threshold: 0.6  # principle score floor
+      consecutive_failures: 3
+    - name: "innovation_drought"
+      threshold: 0.5
+      monitoring_scope: "explorer_lineage"
+  revision_artifacts:
+    blueprint_delta:
+      format: "yaml_patch"
+      storage: "population_state.egg_revision_history"
+    validation_plan:
+      components:
+        - "simulation_suite"
+        - "shadow_deployment"
+        - "performance_regression_matrix"
+  approval_flow:
+    proposer: "judgement_daemon"
+    reviewers: ["optimization_coordinator", "security_officer"]
+    consensus_rule: "supermajority_0.67"
+    rollback_strategy: "staged_rollout_with_automated_revert"
+
+# Feedback Loop into Egg Template
+learning_feedback_pipeline:
+  template_sections:
+    - "egg_template.initialization_parameters"
+    - "modular_components.adaptive_modules"
+    - "specialization_tracks"
+  adjustment_modes:
+    parameter_tuning: "continuous_value_update"
+    module_substitution: "conditional_on_validation"
+    capability_augmentation: "feature_flagged"
+  documentation_requirements:
+    revision_summary: "AGENTS.md#Project Structure & Module Organization"
+    changelog_entry: "openai_profile.yaml#knowledge_bundle"
+    verification_record: "performance_metrics_system.txt#individual_metrics"

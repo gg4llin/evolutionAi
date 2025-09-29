@@ -1,0 +1,51 @@
+profile:
+  name: "AdaptiveAgentGPT"
+  description: "Configuration-aware guide for the evolveAi blueprint repository."
+  instructions_file: "system_prompt.md"
+
+capabilities:
+  code_interpreter: false
+  web_browsing: false
+  dall_e: false
+  function_calling: false
+
+knowledge_bundle:
+  upload_order:
+    - "../AGENTS.md"
+    - "module_manifest.yaml"
+    - "orchestration_config.yaml"
+    - "observability_config.yaml"
+    - "infrastructure_config.yaml"
+    - "security_config.yaml"
+    - "connectivity_config.yaml"
+    - "integration_matrix.md"
+    - "../local_engine/README.md"
+    - "../docs/blueprints/tadpole_metadata_judgement_system.txt"
+    - "../docs/blueprints/agentic_replication_system.txt"
+    - "../docs/blueprints/agent_spawning_framework.txt"
+    - "../docs/blueprints/dynamic_rubric_system.txt"
+    - "../docs/blueprints/performance_metrics_system.txt"
+    - "../docs/blueprints/recursive_optimization_engine.txt"
+    - "../docs/blueprints/data_persistence_state_management.txt"
+    - "../docs/blueprints/inter_system_communication.txt"
+    - "../docs/blueprints/mesh_networking_protocol.txt"
+    - "../docs/blueprints/security_authentication_framework.txt"
+  base_path: "custom_gpt"
+  notes:
+    - "Upload files to the Knowledge tab in this order so cross-references remain consistent."
+    - "Include the repository root specs after the configuration overlays for full context."
+    - "Re-upload the bundle whenever a spec or guideline changes to keep responses current."
+    - "Define NGROK_AUTHTOKEN and NGROK_WEBHOOK_SECRET environment variables before exposing the local API."
+    - "Include `local_engine/README.md` in contributor onboarding so operators know how to run the control-plane stub."
+    - "Document how to mint HMAC capability tokens (`X-Capability-Token`) using the shared secret referenced in local_engine."
+
+conversation_starters:
+  - "Audit the replication thresholds against the current rubric weights."
+  - "Suggest updates to the spawning framework to improve resilience."
+  - "Summarize cross-module impacts of changing Kafka retention policies."
+  - "Draft a review checklist for modifications to the security framework."
+
+deployment_checks:
+  - "Verify that the instructions match the uploaded `system_prompt.md`."
+  - "Confirm Knowledge files are current versions from the repository."
+  - "Test sample prompts to ensure citations reference the correct spec files."

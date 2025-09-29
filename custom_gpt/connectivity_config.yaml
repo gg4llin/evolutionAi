@@ -1,0 +1,57 @@
+connectivity:
+  api_gateway:
+    local_service:
+      name: "AdaptiveAgent Local API"
+      base_url: "http://localhost:8080"
+      healthcheck_endpoint: "/healthz"
+      documentation_endpoint: "/docs"
+    reverse_proxy:
+      provider: "ngrok"
+      command: "ngrok http 8080 --region=us --hostname=adaptive-agent.ngrok.app"
+      required_env:
+        auth_token: "NGROK_AUTHTOKEN"
+        public_url: "NGROK_PUBLIC_URL"
+      security_alignment:
+        authentication: "security_config.yaml#authentication"
+        authorization: "security_config.yaml#authorization"
+      webhook_validation:
+        header: "X-Ngrok-Signature"
+        secret_env: "NGROK_WEBHOOK_SECRET"
+    rate_limits:
+      local_rps: 100
+      external_rps: 60
+      burst: 120
+    observability_hooks:
+      metrics_endpoint: "/metrics"
+      logging_channel: "performance_metrics_system.txt#individual_metrics"
+  control_plane:
+    main_engine:
+      identity: "AdaptiveAgentSwarm"
+      command_topic: "control_plane.commands"
+      heartbeat_topic: "control_plane.heartbeats"
+      heartbeat_interval_ms: 5000
+      required_capabilities:
+        - "spawn_agents"
+        - "retire_agents"
+        - "rebalance_mesh"
+    worker_fleets:
+      tadpole_workers:
+        description: "Lifecycle managers spawned via agent_spawning_framework egg template."
+        spawn_requests:
+          topic: "agent_lifecycle.spawn_requests"
+          delivery_guarantee: "at_least_once"
+        destroy_requests:
+          topic: "agent_lifecycle.retire_requests"
+          delivery_guarantee: "at_least_once"
+        status_updates:
+          topic: "agent_lifecycle.status"
+          schema: "data_persistence_state_management.txt#state_architecture.population_state"
+        max_parallel_workers: 50
+        mesh_bridge: "mesh_networking_protocol.txt#mesh_topology"
+        security_profile: "security_config.yaml#authorization.capability_tokens"
+  integration_notes:
+    - "Back control-plane topics with the Kafka cluster defined in inter_system_communication.txt#message_bus_infrastructure."
+    - "Expose public API endpoints only when NGROK_AUTHTOKEN is registered and webhook signatures are enforced."
+    - "Align replication thresholds with agentic_replication_system.txt#system_config before scaling worker_fleets.tadpole_workers.max_parallel_workers."
+    - "Record connectivity changes in AGENTS.md under Build/Test commands so contributors can start tunnels consistently."
+    - "Require `X-Timestamp` and `X-Capability-Token` headers derived from ADAPTIVE_CAPABILITY_SECRET for all `/commands` requests."

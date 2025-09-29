@@ -1,0 +1,60 @@
+infrastructure:
+  state_management:
+    source_spec: "../docs/blueprints/data_persistence_state_management.txt"
+    consistency_model: "eventual_consistency_with_strong_convergence"
+    durability_guarantee: "crash_recovery_capable"
+    layers:
+      system_state:
+        consistency: "strong_consistency"
+        replication_factor: 3
+        persistence_layer: "distributed_consensus_log"
+      population_state:
+        consistency: "eventual_consistency"
+        replication_factor: 2
+        persistence_layer: "replicated_state_machine"
+      agent_state:
+        consistency: "causal_consistency"
+        replication_factor: 1
+        persistence_layer: "agent_local_storage_with_sync"
+      mesh_state:
+        consistency: "eventual_consistency"
+        replication_factor: 2
+        persistence_layer: "graph_database_distributed"
+  communication_bus:
+    source_spec: "../docs/blueprints/inter_system_communication.txt"
+    technology: "apache_kafka_with_kraft"
+    brokers: 3
+    replication_factor: 2
+    default_topics:
+      system_events:
+        partitions: 6
+        retention_ms: 604800000
+        compression: "lz4"
+      performance_metrics:
+        partitions: 12
+        retention_ms: 2592000000
+        compression: "snappy"
+      mesh_coordination:
+        partitions: 8
+        retention_ms: 259200000
+        compression: "zstd"
+      agent_lifecycle:
+        partitions: 4
+        retention_ms: 1209600000
+        compression: "snappy"
+  mesh_network:
+    source_spec: "../docs/blueprints/mesh_networking_protocol.txt"
+    discovery_protocol: "adaptive_beacon"
+    beacon_interval_ms: 100
+    discovery_timeout_ms: 5000
+    max_discovery_hops: 3
+    connection_strategy:
+      primary: "capability_affinity"
+      fallback: "proximity_based"
+      load_balancing: "weighted_round_robin"
+    mesh_parameters:
+      target_density: 0.7
+      min_connections_per_node: 2
+      max_connections_per_node: 8
+      connection_timeout_ms: 30000
+      heartbeat_interval_ms: 1000

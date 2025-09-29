@@ -1,0 +1,58 @@
+orchestration:
+  replication:
+    source_spec: "../docs/blueprints/agentic_replication_system.txt"
+    replication_threshold: 0.75
+    max_concurrent_agents: 50
+    performance_window: 100
+    rubric_alignment: "dynamic_rubric_system.txt#core_principles"
+    fallback_strategy: "recursive_optimization_engine.txt#micro_cycle"
+  spawning:
+    source_spec: "../docs/blueprints/agent_spawning_framework.txt"
+    egg_template: "egg_template.core_architecture"
+    base_capabilities:
+      self_assessment:
+        implementation: "introspection_engine"
+        resource_cost: 0.1
+      metric_tracking:
+        implementation: "performance_monitor"
+        resource_cost: 0.15
+      communication_protocol:
+        implementation: "mesh_network_stack"
+        resource_cost: 0.2
+      replication_logic:
+        implementation: "genetic_spawning_engine"
+        resource_cost: 0.25
+      performance_optimization:
+        implementation: "adaptive_tuning_system"
+        resource_cost: 0.3
+    initialization_parameters:
+      agent_id: "auto_generated_uuid4"
+      generation: 0
+      timestamp_format: "unix_epoch_nanoseconds"
+  optimization_cycles:
+    source_spec: "../docs/blueprints/recursive_optimization_engine.txt"
+    micro_cycle:
+      duration: 5
+      focus: "tactical_parameter_adjustment"
+      success_threshold: 0.02
+      stability_requirement: true
+      resource_efficiency_gain: 0.05
+    macro_cycle:
+      duration: 25
+      focus: "strategic_architecture_rebalancing"
+      success_threshold: 0.1
+      resilience_target: 0.08
+    meta_cycle:
+      duration: 100
+      focus: "fundamental_architecture_evolution"
+      governance: "dynamic_rubric_system.txt#core_principles"
+  control_plane:
+    connectivity_profile: "connectivity_config.yaml#connectivity.control_plane"
+  egg_revision:
+    judgement_spec: "../docs/blueprints/tadpole_metadata_judgement_system.txt#egg_revision_workflow"
+    command_endpoint: "/commands"
+    command_payload: {"action": "revise_egg"}
+    approval_chain:
+      - "optimization_coordinator"
+      - "security_officer"
+    revision_artifact_store: "population_state.egg_revision_history"

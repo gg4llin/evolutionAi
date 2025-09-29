@@ -1,0 +1,68 @@
+modules:
+  agentic_replication_system:
+    spec_path: "../docs/blueprints/agentic_replication_system.txt"
+    summary: "Coordinates self-replication cycles aligned with dynamic rubrics."
+    dependencies:
+      - dynamic_rubric_system
+      - performance_metrics_system
+      - recursive_optimization_engine
+  agent_spawning_framework:
+    spec_path: "../docs/blueprints/agent_spawning_framework.txt"
+    summary: "Generates specialized tadpole agents from the modular egg template."
+    dependencies:
+      - agentic_replication_system
+      - mesh_networking_protocol
+  data_persistence_state_management:
+    spec_path: "../docs/blueprints/data_persistence_state_management.txt"
+    summary: "Maintains distributed state with tiered consistency guarantees."
+    dependencies:
+      - inter_system_communication
+      - security_authentication_framework
+  dynamic_rubric_system:
+    spec_path: "../docs/blueprints/dynamic_rubric_system.txt"
+    summary: "Adapts performance weights and metric ranges based on live telemetry."
+    dependencies:
+      - performance_metrics_system
+  inter_system_communication:
+    spec_path: "../docs/blueprints/inter_system_communication.txt"
+    summary: "Defines Kafka-based event streams for coordination and telemetry."
+    dependencies:
+      - mesh_networking_protocol
+      - security_authentication_framework
+  mesh_networking_protocol:
+    spec_path: "../docs/blueprints/mesh_networking_protocol.txt"
+    summary: "Controls peer discovery, topology, and binary payload exchange."
+    dependencies:
+      - security_authentication_framework
+  performance_metrics_system:
+    spec_path: "../docs/blueprints/performance_metrics_system.txt"
+    summary: "Tracks individual and swarm-wide KPIs with multi-window analytics."
+    dependencies:
+      - data_persistence_state_management
+  recursive_optimization_engine:
+    spec_path: "../docs/blueprints/recursive_optimization_engine.txt"
+    summary: "Runs micro and macro learning loops for continuous improvement."
+    dependencies:
+      - performance_metrics_system
+      - dynamic_rubric_system
+  security_authentication_framework:
+    spec_path: "../docs/blueprints/security_authentication_framework.txt"
+    summary: "Implements zero-trust identity, authentication, and capability controls."
+    dependencies:
+      - data_persistence_state_management
+  connectivity_overlay:
+    spec_path: "connectivity_config.yaml"
+    summary: "Defines API exposure and control-plane messaging between the main engine and tadpole workers."
+    dependencies:
+      - inter_system_communication
+      - mesh_networking_protocol
+      - security_authentication_framework
+      - agent_spawning_framework
+  metadata_judgement_system:
+    spec_path: "../docs/blueprints/tadpole_metadata_judgement_system.txt"
+    summary: "Establishes the metadata-driven judgement and egg revision workflow."
+    dependencies:
+      - dynamic_rubric_system
+      - agent_spawning_framework
+      - performance_metrics_system
+      - data_persistence_state_management
