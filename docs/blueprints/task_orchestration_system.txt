@@ -117,9 +117,14 @@ self_improvement:
       - "compute_efficiency_ratio"
       - "thread_utilisation"
       - "binary_channel_entropy"
+      - "resource_pressure"
+      - "reward_realisation"
+      - "tadpole_ttl_expirations"
+      - "protocol_success_rate"
     persistence_targets:
       - "population_state.judgement_snapshots"
       - "agent_state.metadata_diary"
+      - "population_state.job_resource_ledger"
   optimisation_hooks:
     micro_cycle: "adjust_thread_weights"
     macro_cycle: "reallocate_resources"

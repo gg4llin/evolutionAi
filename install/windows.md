@@ -10,8 +10,8 @@
 ## Setup Steps (PowerShell)
 1. **Clone the repository (once GitHub is initialised):**
    ```powershell
-   git clone https://github.com/<org>/evolveAi.git
-   Set-Location evolveAi
+   git clone https://github.com/<org>/evolutionAi.git
+   Set-Location evolutionAi
    ```
 2. **Create and activate a virtual environment:**
    ```powershell

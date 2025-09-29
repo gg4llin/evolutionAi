@@ -1,4 +1,4 @@
-# evolveAi
+# evolutionAi
 
 AdaptiveAgent is a blueprint-driven ecosystem for orchestrating self-optimising swarm agents. This repository captures the canonical specifications, a tooling harness for a Custom GPT assistant, and a runnable local control-plane to exercise the designs.
 
@@ -22,7 +22,7 @@ AdaptiveAgent is a blueprint-driven ecosystem for orchestrating self-optimising 
 
 ## Getting Started
 1. Review `install/linux.md`, `install/docker.md`, or `install/windows.md` based on your environment.
-2. Install Python dependencies:
+2. On Debian systems run `install/debian_setup.sh` to create a virtual environment and install dependencies automatically, or manually:
    ```bash
    pip install -r requirements.txt
    ```
@@ -33,7 +33,8 @@ AdaptiveAgent is a blueprint-driven ecosystem for orchestrating self-optimising 
    A synchronous fallback exists via `python -m local_engine.main`, but the ASGI entrypoint plus `uvicorn` is the recommended development path.
 4. (Optional) Expose the API securely via ngrok, following the guidance in `custom_gpt/connectivity_config.yaml` and keeping tokens outside version control.
 5. Submit jobs through `/commands` (`action: "assign_job"`) to exercise tadpole orchestration. Include resource requests (`compute_units`, `memory_mb`, `bandwidth_mbps`) and a `reward_signal`; the engine will spawn multithreaded tadpoles, allocate chunks from the shared resource pool, and monitor progress via `job_status`/`list_jobs`. Use `assign_worker` / `worker_status` to scaffold quest workers that explore new tools and protocols on behalf of the engine.
-6. Attach the knowledge bundle listed in `custom_gpt/openai_profile.yaml` when configuring the Custom GPT; plan to host those assets on a dedicated branch (recommended name: `custom-gpt`).
+6. Validate the environment via `tests/setup_check.sh` (after activating the venv). This compiles the engine, ensures Uvicorn is available, and performs a dry-run job submission.
+7. Attach the knowledge bundle listed in `custom_gpt/openai_profile.yaml` when configuring the Custom GPT; plan to host those assets on a dedicated branch (recommended name: `custom-gpt`).
 
 ## Documentation Map
 - Architectural overviews, roadmaps, and work logs all live under `docs/`. Start with `docs/documentation.md` for curated links.

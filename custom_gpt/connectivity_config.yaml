@@ -58,6 +58,22 @@ connectivity:
       compute_units: 2
       memory_mb: 256
       bandwidth_mbps: 100
+  persistence:
+    database_url_env: "ADAPTIVE_DATABASE_URL"
+    echo: false
+    tables:
+      jobs: "data_persistence_state_management.txt#postgres_relational_layer.jobs"
+      workers: "data_persistence_state_management.txt#postgres_relational_layer.workers"
+      tadpoles: "data_persistence_state_management.txt#postgres_relational_layer.tadpole_instances"
+      metrics: "data_persistence_state_management.txt#postgres_relational_layer.job_metrics"
+      analysis: "data_persistence_state_management.txt#postgres_relational_layer.analysis_requests"
+    dynamic_attributes:
+      attribute_table: "data_persistence_state_management.txt#postgres_relational_layer.dynamic_attributes"
+      schema_change_log: "data_persistence_state_management.txt#postgres_relational_layer.schema_change_log"
+  scaling:
+    max_parallel_tadpoles: 500
+    max_threads: 256
+    tadpole_ttl_seconds: 30
   integration_notes:
     - "Back control-plane topics with the Kafka cluster defined in inter_system_communication.txt#message_bus_infrastructure."
     - "Expose public API endpoints only when NGROK_AUTHTOKEN is registered and webhook signatures are enforced."
@@ -66,3 +82,5 @@ connectivity:
     - "Require `X-Timestamp` and `X-Capability-Token` headers derived from ADAPTIVE_CAPABILITY_SECRET for all `/commands` requests."
     - "Use the resource pool allocations above to assess new job submissions; reject tasks that would exceed remaining capacity."
     - "Workers operate exclusively through the engine: issue `assign_worker`/`worker_status` commands via `/commands` to scaffold quests and capture meta feedback."
+    - "Observe `tadpole_ttl_seconds`; expired tadpoles should feed back into worker metrics and egg revisions."
+    - "Persist every job, worker, tadpole, and analysis record through the PostgreSQL schema so Custom GPT recommendations match live telemetry."

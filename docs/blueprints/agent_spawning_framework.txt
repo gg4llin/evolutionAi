@@ -154,6 +154,30 @@ modular_components:
         significance_level: 0.05
         max_conditioning_set_size: 3
 
+# Tadpole Execution Parameters
+tadpole_execution:
+  ttl_management:
+    default_ttl_seconds: 30
+    extension_policy: "reward_weighted_extension"
+    failure_retry_limit: 3
+    expiry_action: "worker_feedback_entry"
+  protocol_strategy:
+    default_protocol: "binary_symbolic_protocol"
+    worker_override_allowed: true
+    available_protocols:
+      - "binary_symbolic_protocol"
+      - "custom_binary_v2"
+      - "custom_binary_v3"
+      - "worker_defined_dynamic"
+  achievement_targets:
+    success_metrics:
+      - "reward_realisation"
+      - "toolchain_adoption"
+      - "protocol_innovation_score"
+    failure_handlers:
+      - "record_ttl_expiry"
+      - "trigger_worker_instruction"
+
 # Learning Feedback Pipeline
 learning_feedback_pipeline:
   metadata_intake:

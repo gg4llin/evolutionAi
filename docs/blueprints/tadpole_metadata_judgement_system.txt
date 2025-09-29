@@ -50,9 +50,12 @@ metadata_pipeline:
       - "resource_pressure"
       - "reward_realisation"
       - "bandwidth_mbps_utilised"
+      - "tadpole_count"
+      - "thread_allocation"
     storage_targets:
       - "population_state.judgement_snapshots"
       - "agent_state.metadata_diary"
+      - "population_state.tadpole_activity_log"
     dissemination_channels:
       job_events_topic: "control_plane.job_events"
       resource_updates_topic: "control_plane.resource_updates"

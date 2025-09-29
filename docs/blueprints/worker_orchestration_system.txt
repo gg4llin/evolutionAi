@@ -12,6 +12,9 @@ worker_system_metadata:
     engine_to_worker: "control_plane.worker_commands"
     worker_to_egg: "binary_symbolic_protocol"
     worker_to_tadpole: "quest_payload_bus"
+  persistence_targets:
+    worker_journal: "population_state.worker_journal"
+    tadpole_activity_log: "population_state.tadpole_activity_log"
 
 # Worker Lifecycle
 worker_lifecycle:
@@ -39,6 +42,8 @@ worker_lifecycle:
     assign_worker: "engine -> worker"
     worker_status: "engine -> diagnostics"
     list_workers: "engine -> reporting"
+    worker_instruction: "engine -> egg_revision"
+    egg_patch_feedback: "worker -> engine"
 
 # Quest Assignment Framework
 quest_framework:
@@ -50,6 +55,7 @@ quest_framework:
       - "protocol_overrides"
       - "success_metrics"
       - "reward_model"
+      - "ttl_seconds"
     optional_fields:
       - "external_endpoints"
       - "tooling_discovery_notes"
@@ -60,6 +66,7 @@ quest_framework:
       - "adaptive_protocol_selection"
       - "dynamic_resource_scaling"
       - "symbol_dictionary_evolution"
+      - "ttl_expiry_feedback"
 
 # Feedback and Meta Aggregation
 meta_feedback:
@@ -87,8 +94,11 @@ meta_feedback:
           - "resource_efficiency"
           - "protocol_innovation_score"
           - "toolchain_adoption_rate"
+          - "tadpole_ttl_expirations"
   aggregation_pipeline:
     storage: "population_state.worker_journal"
+    supplemental_logs:
+      - "population_state.tadpole_activity_log"
     analytics:
       metric_weighting: "task_orchestration_system.txt#self_improvement"
       anomaly_detection: "bayesian_change_point"
@@ -121,12 +131,12 @@ improvement_loop:
     environment_scan:
       enable_web_search: true
       allow_tool_discovery: true
- decision_engine:
-   algorithm: "multi-armed_bandit_with_context"
-   exploration_budget: 0.2
-   exploitation_bias: 0.8
- outputs:
-   egg_patch_proposals: "yaml_patch"
-   protocol_updates: "binary_symbol_dictionary"
-   new_toolchain_entries: "tool_catalogue.json"
+  decision_engine:
+    algorithm: "multi-armed_bandit_with_context"
+    exploration_budget: 0.2
+    exploitation_bias: 0.8
+  outputs:
+    egg_patch_proposals: "yaml_patch"
+    protocol_updates: "binary_symbol_dictionary"
+    new_toolchain_entries: "tool_catalogue.json"
     worker_metrics_snapshot: "population_state.worker_journal"

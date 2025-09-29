@@ -10,15 +10,19 @@ Tested on Ubuntu 22.04 LTS. Adapt as needed for other distributions.
 ## Setup Steps
 1. **Clone the repository (once repo is initialised):**
    ```bash
-   git clone https://github.com/<org>/evolveAi.git
-   cd evolveAi
+   git clone https://github.com/<org>/evolutionAi.git
+   cd evolutionAi
    ```
 2. **Create and activate a virtual environment:**
    ```bash
    python3 -m venv .venv
    source .venv/bin/activate
    ```
-3. **Install Python dependencies:**
+3. **Option A (recommended) run the automation script:**
+   ```bash
+   ./install/debian_setup.sh
+   ```
+   **Option B (manual) install Python dependencies:**
    ```bash
    pip install -r requirements.txt
    ```

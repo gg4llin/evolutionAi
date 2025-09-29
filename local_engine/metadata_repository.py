@@ -38,7 +38,8 @@ class MetadataRepository:
         aggregated: Dict[str, List[float]] = {}
         for record in self._records:
             for key, value in record.metrics.items():
-                aggregated.setdefault(key, []).append(value)
+                if isinstance(value, (int, float)):
+                    aggregated.setdefault(key, []).append(float(value))
         return {key: statistics.fmean(values) for key, values in aggregated.items() if values}
 
     def principle_averages(self) -> Dict[str, float]:
@@ -46,7 +47,8 @@ class MetadataRepository:
             return {}
         aggregated: Dict[str, List[float]] = {}
         for record in self._records:
-            breakdown = self._rubric.principle_breakdown(record.metrics)
+            numeric_metrics = {k: v for k, v in record.metrics.items() if isinstance(v, (int, float))}
+            breakdown = self._rubric.principle_breakdown(numeric_metrics)
             for principle, score in breakdown.items():
                 aggregated.setdefault(principle, []).append(score)
         return {key: statistics.fmean(values) for key, values in aggregated.items() if values}

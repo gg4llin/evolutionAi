@@ -1,3 +1,5 @@
 # Core dependencies for the AdaptiveAgent local engine and tooling.
 pyyaml>=6.0
 uvicorn>=0.29
+SQLAlchemy>=2.0
+psycopg[binary]>=3.1

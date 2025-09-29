@@ -37,6 +37,9 @@ state_architecture:
         worker_journal:
           schema: "worker_orchestration_system.txt#meta_feedback"
           retention_policy: "365_days_detailed_3_years_archive"
+        tadpole_activity_log:
+          schema: "tadpole_metadata_judgement_system.txt#metadata_pipeline"
+          retention_policy: "90_days_detailed"
       
     agent_state:
       scope: "individual_agent_data"
@@ -91,6 +94,115 @@ state_architecture:
         fused_capabilities: "merged_capability_vectors"
         fusion_history: "capability_evolution_log"
         synergy_matrix: "interaction_effect_measurements"
+
+postgres_relational_layer:
+  description: "Structured ledger hosted on PostgreSQL for long-lived analytics and Custom GPT alignment."
+  connection_profile:
+    env_variable: "ADAPTIVE_DATABASE_URL"
+    migration_strategy: "sqlalchemy_metadata_autocreate_with_reviewed_alter_statements"
+    dynamic_extension: "schema_change_log_controls_column_growth"
+  orchestration_tables:
+    jobs:
+      schema_anchor: "postgres_relational_layer.jobs"
+      primary_key: "job_id"
+      columns:
+        - "objective TEXT"
+        - "status VARCHAR(32)"
+        - "reward_signal FLOAT"
+        - "requested_resources JSONB"
+        - "metadata JSONB"
+        - "spawned_at TIMESTAMPTZ"
+        - "started_at TIMESTAMPTZ"
+        - "completed_at TIMESTAMPTZ"
+      notes: "Every `/assign_job` invocation upserts here; resource allocations referenced via resource_allocations.job_id."
+    job_metrics:
+      primary_key: "id SERIAL"
+      foreign_keys:
+        - "job_id -> jobs.job_id"
+      purpose: "time-series metrics recorded on job completion (latency, efficiency, ttl expirations)."
+    resource_allocations:
+      foreign_keys:
+        - "job_id -> jobs.job_id"
+      columns:
+        - "compute_units INT"
+        - "memory_mb INT"
+        - "bandwidth_mbps INT"
+        - "thread_count INT"
+        - "allocated_at TIMESTAMPTZ"
+        - "released_at TIMESTAMPTZ NULLABLE"
+      notes: "Supports capacity replay and throttling recommendations."
+    workers:
+      primary_key: "worker_id"
+      columns:
+        - "job_id VARCHAR NULL"
+        - "worker_type VARCHAR(32)"  # tadpole | quest_worker | supervisor
+        - "specialization VARCHAR"
+        - "status VARCHAR(32)"
+        - "spawned_at TIMESTAMPTZ"
+        - "retired_at TIMESTAMPTZ"
+        - "ttl_seconds INT"
+        - "expiry_at TIMESTAMPTZ"
+        - "metadata JSONB"
+      notes: "Captures both tadpoles and higher-order workers; lifecycle events fan out via worker_events."
+    worker_events:
+      foreign_keys:
+        - "worker_id -> workers.worker_id"
+      columns:
+        - "event_type VARCHAR(64)"
+        - "payload JSONB"
+        - "occurred_at TIMESTAMPTZ"
+    tadpole_instances:
+      primary_key: "tadpole_id"
+      foreign_keys:
+        - "worker_id -> workers.worker_id"
+        - "job_id -> jobs.job_id"
+      columns:
+        - "communication_protocol VARCHAR"
+        - "resource_allocation JSONB"
+        - "status VARCHAR(32)"
+        - "spawned_at TIMESTAMPTZ"
+        - "expiry_at TIMESTAMPTZ"
+      notes: "Allows TTL analysis and per-tadpole outcome tracing."
+    tadpole_metrics:
+      foreign_keys:
+        - "tadpole_id -> tadpole_instances.tadpole_id"
+      purpose: "micro-metrics for each tadpole (entropy, resource pressure, protocol success)."
+    dynamic_attributes:
+      columns:
+        - "entity_type VARCHAR(32)"
+        - "entity_id VARCHAR(128)"
+        - "attribute_key VARCHAR(128)"
+        - "attribute_value JSONB"
+        - "weight_hint FLOAT"
+        - "observed_at TIMESTAMPTZ"
+      notes: "Main engine stores experimental fields here before materialising schema changes."
+    schema_change_log:
+      columns:
+        - "initiated_by VARCHAR(128)"
+        - "entity_name VARCHAR(128)"
+        - "action VARCHAR(64)"  # proposed | applied
+        - "ddl_statement TEXT"
+        - "rationale TEXT"
+        - "created_at TIMESTAMPTZ"
+      notes: "Operations review uses this ledger to approve dynamic column additions."
+    code_versions:
+      purpose: "Digest-indexed catalogue of worker code artifacts."
+    code_update_reports:
+      purpose: "Worker-authored improvement suggestions referencing code_versions."
+      policy: "No automatic deployment; reports feed manual review."
+    analysis_requests:
+      purpose: "Stores trial prompts such as monetization scans or Cardano forecasting missions."
+      lifecycle: "queued -> running -> completed"
+    analysis_runs:
+      notes: "Joins trial requests to concrete jobs/workers and summarises outcomes."
+    analysis_findings:
+      purpose: "Structured outputs for reviewers (monetization_score, novelty_score)."
+    finding_artifacts:
+      purpose: "URI pointers to notebooks, charts, or raw data supporting findings."
+    improvement_reports:
+      purpose: "Tracks job- or request-linked adjustment bundles for governance."
+    learning_snapshots:
+      purpose: "Chronicles principle scores persisted alongside rubric version for longitudinal review."
 
 # Storage Backend Configuration
 storage_backends:

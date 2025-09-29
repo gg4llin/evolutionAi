@@ -1,6 +1,6 @@
 # Documentation Index
 
-Welcome to the evolveAi knowledge base. Use this index to navigate the materials that describe, operate, and extend the AdaptiveAgent platform.
+Welcome to the evolutionAi knowledge base. Use this index to navigate the materials that describe, operate, and extend the AdaptiveAgent platform.
 
 ## Blueprint Library
 All canonical specifications reside in `docs/blueprints/`. Each file mirrors a subsystem:
@@ -20,6 +20,7 @@ All canonical specifications reside in `docs/blueprints/`. Each file mirrors a s
 ## Operational Playbooks
 - `AGENTS.md` — contributor expectations, coding conventions, and review policy.
 - `install/linux.md`, `install/docker.md`, `install/windows.md` — platform-specific installation and bootstrap steps.
+- `install/debian_setup.sh` — automated Debian setup script (creates a virtual environment, installs dependencies, runs sanity checks).
 - `local_engine/README.md` — control-plane API surface, command payloads, and token requirements.
 
 ## Strategic Planning

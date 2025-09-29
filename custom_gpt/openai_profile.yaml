@@ -1,6 +1,6 @@
 profile:
   name: "AdaptiveAgentGPT"
-  description: "Configuration-aware guide for the evolveAi blueprint repository."
+  description: "Configuration-aware guide for the evolutionAi blueprint repository."
   instructions_file: "system_prompt.md"
 
 capabilities:

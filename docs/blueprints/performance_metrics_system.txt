@@ -153,6 +153,15 @@ job_metrics:
     measurement_type: "scalar"
     definition: "sum(reward_signal * completion_success)"
     aggregation_window: 10
+  ttl_expiration_rate:
+    measurement_type: "percentage"
+    formula: "expired_tadpoles / total_tadpoles"
+    optimisation_direction: "minimise"
+    alert_threshold: 0.1
+  protocol_success_rate:
+    measurement_type: "ratio"
+    formula: "successful_protocol_runs / total_protocol_trials"
+    optimisation_direction: "optimise"
 
 # Evolutionary Performance Indicators
 evolutionary_metrics:

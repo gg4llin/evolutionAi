@@ -1,4 +1,4 @@
-# evolveAi Roadmap
+# evolutionAi Roadmap
 
 ## Q1: Judgement Loop Hardening
 - Finalise persistence bindings for `population_state.judgement_snapshots` and integrate with production storage.
