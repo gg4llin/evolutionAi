@@ -16,6 +16,7 @@ Consistency allows AdaptiveAgent contributors, automation, and the hosted Custom
 - Use PascalCase for globally recognised systems (`AdaptiveAgentSwarm`, `RecursiveMetaOptimizer`).
 - Use snake_case for configuration keys and metric identifiers (`replication_threshold`, `learning_velocity`).
 - When referencing files inside the repository, prefer repository-relative paths (`docs/blueprints/performance_metrics_system.txt`).
+- Store sensitive values in `.env` (ignored by git) and distribute redacted templates as `.env.example`.
 
 ## Branches (Git)
 - Reserve `main` for production-ready blueprints.

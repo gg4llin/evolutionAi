@@ -9,6 +9,7 @@
 - Deploy the AdaptiveAgent local engine behind a managed ingress with TLS cert rotation.
 - Promote the Custom GPT configuration to its dedicated `custom-gpt` branch and wire CI to validate instructions vs. repo state.
 - Author scenario tests that replay metrics into `/commands` to validate spawn + retire safety rails.
+- Expand quest worker automation to source new protocols/tools from open APIs and MCP servers, updating the symbolic communication dictionary automatically.
 
 ## Q3: Distributed Swarm Pilot
 - Connect the control-plane to the Kafka topics defined in `inter_system_communication.txt` and exercise multi-node spawning.

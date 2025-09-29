@@ -30,6 +30,8 @@ knowledge_bundle:
     - "../docs/blueprints/inter_system_communication.txt"
     - "../docs/blueprints/mesh_networking_protocol.txt"
     - "../docs/blueprints/security_authentication_framework.txt"
+    - "../docs/blueprints/task_orchestration_system.txt"
+    - "../docs/blueprints/worker_orchestration_system.txt"
   base_path: "custom_gpt"
   notes:
     - "Upload files to the Knowledge tab in this order so cross-references remain consistent."

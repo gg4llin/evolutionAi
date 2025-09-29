@@ -6,6 +6,7 @@ protocol_metadata:
   version: "3.0.0"
   binary_compatibility_level: "machine_native"
   endianness: "little_endian"
+  preferred_encoding: "adaptive_binary_symbols"
 
 # Mesh Topology Management
 mesh_topology:
@@ -21,6 +22,7 @@ mesh_topology:
     fallback: "proximity_based"
     load_balancing: "weighted_round_robin"
     connection_pooling: true
+    payload_encoding: "binary_symbolic"
     
   mesh_parameters:
     target_density: 0.7
@@ -37,6 +39,9 @@ tadpole_mesh_operations:
       capability_vector_weight: 0.6
       performance_signature_weight: 0.4
       threshold: 0.8
+    communication_negotiation:
+      protocol: "symbolic_dictionary_exchange"
+      compression: "dictionary_learning"
       
     complementarity_detection:
       algorithm: "capability_gap_analysis"

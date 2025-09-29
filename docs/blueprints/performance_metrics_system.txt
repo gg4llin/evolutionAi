@@ -54,6 +54,20 @@ individual_metrics:
       inversion_for_scoring: true  # lower variance = higher stability
       weight_in_composite_score: 0.05
 
+    compute_efficiency_ratio:
+      measurement_type: "ratio"
+      formula: "allocated_compute_units / actual_compute_usage"
+      target_range: [0.8, 1.1]
+      optimisation_direction: "optimise"
+      weight_in_composite_score: 0.15
+
+    thread_utilisation:
+      measurement_type: "percentage"
+      target_range: [70, 95]
+      optimisation_direction: "maximize"
+      calculation_window: 25
+      weight_in_composite_score: 0.10
+
   tracking_granularity:
     real_time:
       interval: 1000  # milliseconds
@@ -117,6 +131,28 @@ collective_performance:
       adaptability: "response_to_environmental_changes"
       stability: "performance_variance_under_stress"
     calculation_method: "harmonic_mean_with_failure_penalties"
+
+# Job-Level Metrics
+job_metrics:
+  latency_distribution:
+    measurement_type: "histogram"
+    buckets: [1, 5, 15, 30, 60]
+    optimisation_direction: "minimise"
+  success_rate:
+    measurement_type: "percentage"
+    target_range: [85, 100]
+  resource_pressure:
+    measurement_type: "ratio"
+    formula: "allocated_resources / total_resources"
+    alert_threshold: 0.9
+  binary_channel_entropy:
+    measurement_type: "bits_per_symbol"
+    target_range: [0.2, 0.6]
+    optimisation_direction: "optimise"
+  reward_realisation:
+    measurement_type: "scalar"
+    definition: "sum(reward_signal * completion_success)"
+    aggregation_window: 10
 
 # Evolutionary Performance Indicators
 evolutionary_metrics:

@@ -12,11 +12,11 @@ This guide describes how to containerise the AdaptiveAgent local engine for repe
 FROM python:3.11-slim
 
 WORKDIR /app
-COPY . /app
-
-RUN pip install --no-cache-dir pyyaml \
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt \
     && adduser --disabled-password agent
 
+COPY . /app
 USER agent
 ENV PYTHONUNBUFFERED=1 \
     ADAPTIVE_CAPABILITY_SECRET=changeme \
@@ -24,7 +24,7 @@ ENV PYTHONUNBUFFERED=1 \
     PORT=8080
 
 EXPOSE 8080
-CMD ["python", "-m", "local_engine.main", "--host", "${HOST}", "--port", "${PORT}"]
+CMD ["uvicorn", "local_engine.asgi:app", "--host", "${HOST}", "--port", "${PORT}"]
 ```
 
 ## Build and Run
@@ -41,6 +41,11 @@ docker run -p 8080:8080 \
   -e ADAPTIVE_CAPABILITY_SECRET="<secret>" \
   -v "$PWD/docs/blueprints:/app/docs/blueprints" \
   adaptive-agent:latest
+```
+
+Alternatively, supply a local `.env` file (never commit real secrets):
+```bash
+docker run -p 8080:8080 --env-file .env adaptive-agent:latest
 ```
 
 ## Optional: ngrok Sidecar

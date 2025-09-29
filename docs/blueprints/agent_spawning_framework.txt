@@ -50,6 +50,12 @@ egg_template:
       memory_limit: 512  # MB
       network_bandwidth: 100  # Mbps
       storage_quota: 1024  # MB
+      compute_units: 4
+      bandwidth_channel: "low_latency_binary"
+    thread_execution:
+      default_threads: 4
+      max_threads: 16
+      scheduling: "thread_pool_executor"
       
     performance_targets:
       initial_performance_target: 0.6
@@ -160,16 +166,19 @@ learning_feedback_pipeline:
       - "learning_velocity"
       - "collaborative_synergy"
       - "adaptive_resilience"
+      - "compute_efficiency_ratio"
+      - "binary_channel_entropy"
   pre_spawn_review:
     orchestrator: "RecursiveMetaOptimizer"
     decision_criteria:
       composite_score_floor: 0.62
       principle_variance_threshold: 0.18
       anomaly_gate: "judgement_ledger.anomaly_detection"
-    revision_actions:
-      - "parameter_adjustment"
-      - "specialization_rebalance"
-      - "module_substitution_request"
+      revision_actions:
+        - "parameter_adjustment"
+        - "specialization_rebalance"
+        - "module_substitution_request"
+        - "resource_profile_update"
   egg_revision_output:
     artifact_type: "yaml_patch"
     destination: "population_state.egg_revision_history"

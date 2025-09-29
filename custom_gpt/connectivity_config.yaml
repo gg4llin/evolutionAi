@@ -49,9 +49,20 @@ connectivity:
         max_parallel_workers: 50
         mesh_bridge: "mesh_networking_protocol.txt#mesh_topology"
         security_profile: "security_config.yaml#authorization.capability_tokens"
+  resource_pools:
+    compute_units_total: 256
+    memory_mb_total: 65536
+    bandwidth_mbps_total: 10000
+    max_threads: 128
+    min_chunk:
+      compute_units: 2
+      memory_mb: 256
+      bandwidth_mbps: 100
   integration_notes:
     - "Back control-plane topics with the Kafka cluster defined in inter_system_communication.txt#message_bus_infrastructure."
     - "Expose public API endpoints only when NGROK_AUTHTOKEN is registered and webhook signatures are enforced."
     - "Align replication thresholds with agentic_replication_system.txt#system_config before scaling worker_fleets.tadpole_workers.max_parallel_workers."
     - "Record connectivity changes in AGENTS.md under Build/Test commands so contributors can start tunnels consistently."
     - "Require `X-Timestamp` and `X-Capability-Token` headers derived from ADAPTIVE_CAPABILITY_SECRET for all `/commands` requests."
+    - "Use the resource pool allocations above to assess new job submissions; reject tasks that would exceed remaining capacity."
+    - "Workers operate exclusively through the engine: issue `assign_worker`/`worker_status` commands via `/commands` to scaffold quests and capture meta feedback."

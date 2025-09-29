@@ -66,3 +66,18 @@ modules:
       - agent_spawning_framework
       - performance_metrics_system
       - data_persistence_state_management
+  task_orchestration_system:
+    spec_path: "../docs/blueprints/task_orchestration_system.txt"
+    summary: "Coordinates job intake, resource allocation, and multithreaded tadpole execution."
+    dependencies:
+      - agentic_replication_system
+      - agent_spawning_framework
+      - mesh_networking_protocol
+      - data_persistence_state_management
+  worker_orchestration_system:
+    spec_path: "../docs/blueprints/worker_orchestration_system.txt"
+    summary: "Defines worker questing, meta feedback aggregation, and engine oversight interfaces."
+    dependencies:
+      - task_orchestration_system
+      - tadpole_metadata_judgement_system
+      - inter_system_communication

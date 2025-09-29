@@ -20,18 +20,17 @@ Tested on Ubuntu 22.04 LTS. Adapt as needed for other distributions.
    ```
 3. **Install Python dependencies:**
    ```bash
-   pip install -r requirements.txt  # generate this as dependencies are formalised
-   pip install pyyaml
+   pip install -r requirements.txt
    ```
-4. **Export required environment variables:**
+4. **Load secrets from a local `.env` (keep outside source control):**
    ```bash
-   export ADAPTIVE_CAPABILITY_SECRET="<32+ character secret>"
-   export NGROK_AUTHTOKEN="<token>"      # optional
-   export NGROK_WEBHOOK_SECRET="<secret>" # optional
+   cp .env.example .env
+   # edit .env with your secrets
+   export $(grep -v '^#' .env | xargs)
    ```
-5. **Run the local engine:**
+5. **Run the local engine with Uvicorn:**
    ```bash
-   python -m local_engine.main --host 127.0.0.1 --port 8080
+   uvicorn local_engine.asgi:app --host 127.0.0.1 --port 8080
    ```
 6. **(Optional) Expose the service via ngrok:**
    ```bash

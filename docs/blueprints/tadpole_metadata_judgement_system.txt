@@ -24,6 +24,10 @@ metadata_pipeline:
       transport: "inter_system_communication.txt#mesh_coordination"
       enrichment: "mesh_networking_protocol.txt#tadpole_mesh_operations"
       capture_frequency: "every_5_seconds"
+    worker_state_updates:
+      transport: "inter_system_communication.txt#worker_state_updates"
+      schema_reference: "worker_orchestration_system.txt#worker_lifecycle"
+      capture_frequency: "event_driven"
   preprocessing:
     normalization:
       metric_scaling: "min_max_0_1"
@@ -36,6 +40,22 @@ metadata_pipeline:
         - "population_state.judgement_snapshots"
         - "agent_state.metadata_diary"
       retention_policy: "90_days_detailed_1_year_summary"
+
+  metric_capture:
+    collected_metrics:
+      - "job_latency_seconds"
+      - "compute_efficiency_ratio"
+      - "thread_utilisation"
+      - "binary_channel_entropy"
+      - "resource_pressure"
+      - "reward_realisation"
+      - "bandwidth_mbps_utilised"
+    storage_targets:
+      - "population_state.judgement_snapshots"
+      - "agent_state.metadata_diary"
+    dissemination_channels:
+      job_events_topic: "control_plane.job_events"
+      resource_updates_topic: "control_plane.resource_updates"
 
 # Principle Scoring Engine
 principle_scoring:

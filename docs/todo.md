@@ -4,11 +4,13 @@
 - [ ] Wire `/commands` responses into a structured log file for population state replay tests.
 - [ ] Draft ngrok automation script that respects the rate limits in `custom_gpt/connectivity_config.yaml`.
 - [ ] Validate the HMAC capability token examples across Linux, macOS, and Windows shells.
+- [ ] Implement real quest execution handlers so `assign_worker` can explore live APIs/MCP servers.
 
 ## Near-Term
 - [ ] Implement persistence adapters so `MetadataRepository.records()` streams to `population_state.judgement_snapshots`.
 - [ ] Enrich `local_engine.judgement_system` with configurable thresholds sourced directly from the blueprint specs.
 - [ ] Publish CI jobs that lint YAML/JSON and run smoke tests against the local engine API.
+- [ ] Integrate dynamic protocol selection so workers can update symbolic encodings based on discoveries.
 
 ## Long-Term
 - [ ] Stand up the proposed `custom-gpt` branch with an automated knowledge bundle export.

@@ -14,6 +14,8 @@ All canonical specifications reside in `docs/blueprints/`. Each file mirrors a s
 - `mesh_networking_protocol.txt` — discovery, topology, and heartbeat cadence.
 - `security_authentication_framework.txt` — zero-trust authentication, authorisation, and audit controls.
 - `tadpole_metadata_judgement_system.txt` — metadata ingestion, ledger governance, and egg revision workflow.
+- `task_orchestration_system.txt` — job intake, resource allocation, and multithreaded execution policy.
+- `worker_orchestration_system.txt` — worker questing, tool discovery, and meta feedback routing.
 
 ## Operational Playbooks
 - `AGENTS.md` — contributor expectations, coding conventions, and review policy.
@@ -28,6 +30,8 @@ All canonical specifications reside in `docs/blueprints/`. Each file mirrors a s
 - `custom_gpt/system_prompt.md` — production instructions for AdaptiveAgentGPT.
 - `custom_gpt/integration_matrix.md` — crosswalk between specs, assistant guidance, and runtime touchpoints.
 - `custom_gpt/openai_profile.yaml` — knowledge upload order and deployment checks.
+- `docs/custom-gpt-branch.md` — instructions for maintaining the dedicated Custom GPT branch.
+- `.env.example` — reference template for local secrets (actual `.env` files must remain untracked).
 
 ## Extensibility Guidelines
 - `docs/naming-conventions.md` — update when introducing new directories or file types.

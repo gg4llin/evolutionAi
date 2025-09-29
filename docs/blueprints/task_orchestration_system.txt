@@ -1,0 +1,126 @@
+# Task Orchestration and Resource Allocation System
+# Adaptive job routing for multi-threaded tadpole execution
+
+task_orchestration_metadata:
+  name: "AdaptiveTaskOrchestrator"
+  version: "1.0.0"
+  mission: "Accept user-specified jobs, allocate resources, and coordinate multithreaded tadpole execution with self-improving feedback loops."
+  integration_points:
+    - "agentic_replication_system.txt#pre_spawn_judgement"
+    - "agent_spawning_framework.txt#learning_feedback_pipeline"
+    - "tadpole_metadata_judgement_system.txt#metadata_pipeline"
+    - "inter_system_communication.txt#message_bus_infrastructure"
+
+# Job Intake and Classification
+job_intake_pipeline:
+  api_endpoint: "/commands"  # action: assign_job
+  payload_contract:
+    required_fields:
+      - "job_id"
+      - "objective"
+      - "requested_resources.compute_units"
+      - "requested_resources.memory_mb"
+      - "requested_resources.bandwidth_mbps"
+      - "tadpole_count"
+    optional_fields:
+      - "worker_id"
+      - "expected_duration_seconds"
+      - "reward_signal"
+      - "metadata"
+  classification_engine:
+    algorithm: "multi-objective_priority_queue"
+    scoring_inputs:
+      - "reward_signal"
+      - "objective_complexity"
+      - "resource_pressure"
+    escalation_policy:
+      saturation_threshold: 0.85
+      mitigation_actions:
+        - "spawn_additional_tadpoles"
+        - "rebalance_thread_pools"
+
+# Resource Management
+resource_pools:
+  compute_units_total: 256
+  memory_mb_total: 65536
+  bandwidth_mbps_total: 10000
+  thread_pool:
+    max_threads: 128
+    allocation_strategy: "proportional_chunking"
+    adaptive_throttling: "disabled"  # prefer full utilisation until saturation
+  allocation_algorithm:
+    fallback_policy: "best_effort"
+    min_chunk:
+      compute_units: 2
+      memory_mb: 256
+      bandwidth_mbps: 100
+    audit_logging: "population_state.job_resource_ledger"
+
+# Tadpole Execution Strategy
+tadpole_execution:
+  spawning_rules:
+    default_specialization: "generalist"
+    communication_mode: "binary_symbolic_protocol"
+    id_format: "uuid4"
+  multithreading:
+    scheduler: "thread_pool_executor"
+    default_threads_per_tadpole: 4
+    max_threads_per_tadpole: 16
+    communication_channel: "low_latency_binary_bus"
+  communication_encoding:
+    symbol_set: "adaptive_binary_symbols"
+    negotiation_protocol: "capability_affinity_handshake"
+    compression: "dictionary_learning"
+    worker_feedback_channel: "worker_orchestration_system.txt#meta_feedback"
+
+# Job Lifecycle
+job_lifecycle:
+  states:
+    - "queued"
+    - "running"
+    - "completed"
+    - "failed"
+  state_transitions:
+    queued_to_running:
+      trigger: "resource_allocation_success"
+      actions:
+        - "spawn_tadpoles"
+        - "publish_start_event"
+    running_to_completed:
+      trigger: "executor_signal_success"
+      actions:
+        - "release_resources"
+        - "record_metrics"
+        - "notify_judgement_system"
+        - "update_worker_improvement_metrics"
+    running_to_failed:
+      trigger: "executor_signal_failure"
+      actions:
+        - "release_resources"
+        - "publish_failure_event"
+        - "schedule_recovery_attempt"
+  telemetry_topics:
+    job_events: "control_plane.job_events"
+    resource_updates: "control_plane.resource_updates"
+
+# Feedback and Self-Improvement
+self_improvement:
+  reward_processing:
+    reinforcement_signal_source: "job_payload.reward_signal"
+    adaptation_targets:
+      - "resource_allocation_weights"
+      - "specialization_selection"
+      - "thread_pool_configuration"
+  metadata_capture:
+    metrics_collected:
+      - "job_latency_seconds"
+      - "compute_efficiency_ratio"
+      - "thread_utilisation"
+      - "binary_channel_entropy"
+    persistence_targets:
+      - "population_state.judgement_snapshots"
+      - "agent_state.metadata_diary"
+  optimisation_hooks:
+    micro_cycle: "adjust_thread_weights"
+    macro_cycle: "reallocate_resources"
+    meta_cycle: "evolve_symbolic_protocol"

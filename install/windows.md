@@ -20,17 +20,24 @@
    ```
 3. **Install dependencies:**
    ```powershell
-   pip install pyyaml
+   pip install -r requirements.txt
    ```
-4. **Set environment variables:**
+4. **Set environment variables securely (PowerShell):**
    ```powershell
-   $env:ADAPTIVE_CAPABILITY_SECRET = "<32+ character secret>"
-   $env:NGROK_AUTHTOKEN = "<token>"          # optional
-   $env:NGROK_WEBHOOK_SECRET = "<secret>"    # optional
+   Copy-Item .env.example .env
+   notepad .env
+   Get-Content .env | ForEach-Object {
+     if ($_ -and $_ -notlike '#*') {
+       $pair = $_.Split('=')
+       $name = $pair[0]
+       $value = $pair[1]
+       Set-Item -Path Env:$name -Value $value
+     }
+   }
    ```
-5. **Run the local engine:**
+5. **Run the local engine with Uvicorn:**
    ```powershell
-   python -m local_engine.main --host 127.0.0.1 --port 8080
+   uvicorn local_engine.asgi:app --host 127.0.0.1 --port 8080
    ```
 6. **(Optional) ngrok tunnel:**
    ```powershell

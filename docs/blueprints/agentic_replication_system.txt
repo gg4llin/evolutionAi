@@ -120,6 +120,7 @@ agent_spawning:
       composite_score_floor: 0.62
       principle_score_band: 0.18
       anomaly_quorum: 0.67
+      resource_pressure_ceiling: 0.9
     revision_outputs:
       artifact_type: "yaml_patch"
       handoff_target: "agent_spawning_framework.txt#learning_feedback_pipeline"

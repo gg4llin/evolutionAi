@@ -3,7 +3,7 @@
 AdaptiveAgent is a blueprint-driven ecosystem for orchestrating self-optimising swarm agents. This repository captures the canonical specifications, a tooling harness for a Custom GPT assistant, and a runnable local control-plane to exercise the designs.
 
 ## Repository Layout
-- `docs/blueprints/` — canonical subsystem specifications (replication, spawning, metrics, security, metadata judgement, etc.).
+- `docs/blueprints/` — canonical subsystem specifications (replication, spawning, metrics, security, metadata judgement, task orchestration, worker orchestration, etc.).
 - `docs/documentation.md` — entry point to the broader documentation set, including roadmap and day-to-day operator notes.
 - `docs/roadmap.md` — high-level delivery milestones and sequencing.
 - `docs/todo.md` — granular backlog items aligned to the roadmap themes.
@@ -22,12 +22,18 @@ AdaptiveAgent is a blueprint-driven ecosystem for orchestrating self-optimising 
 
 ## Getting Started
 1. Review `install/linux.md`, `install/docker.md`, or `install/windows.md` based on your environment.
-2. Export `ADAPTIVE_CAPABILITY_SECRET=<32+ chars>` and start the local control plane:
+2. Install Python dependencies:
    ```bash
-   python -m local_engine.main --host 127.0.0.1 --port 8080
+   pip install -r requirements.txt
    ```
-3. (Optional) Expose the API via ngrok, following the security guidance in `custom_gpt/connectivity_config.yaml`.
-4. Attach the knowledge bundle listed in `custom_gpt/openai_profile.yaml` when configuring the Custom GPT; plan to host those assets on a dedicated branch (recommended name: `custom-gpt`).
+3. Export secrets (for example `cp .env.example .env` and populate it, then `export $(grep -v '^#' .env | xargs)`), and start the local control plane with Uvicorn:
+   ```bash
+   uvicorn local_engine.asgi:app --host 127.0.0.1 --port 8080
+   ```
+   A synchronous fallback exists via `python -m local_engine.main`, but the ASGI entrypoint plus `uvicorn` is the recommended development path.
+4. (Optional) Expose the API securely via ngrok, following the guidance in `custom_gpt/connectivity_config.yaml` and keeping tokens outside version control.
+5. Submit jobs through `/commands` (`action: "assign_job"`) to exercise tadpole orchestration. Include resource requests (`compute_units`, `memory_mb`, `bandwidth_mbps`) and a `reward_signal`; the engine will spawn multithreaded tadpoles, allocate chunks from the shared resource pool, and monitor progress via `job_status`/`list_jobs`. Use `assign_worker` / `worker_status` to scaffold quest workers that explore new tools and protocols on behalf of the engine.
+6. Attach the knowledge bundle listed in `custom_gpt/openai_profile.yaml` when configuring the Custom GPT; plan to host those assets on a dedicated branch (recommended name: `custom-gpt`).
 
 ## Documentation Map
 - Architectural overviews, roadmaps, and work logs all live under `docs/`. Start with `docs/documentation.md` for curated links.

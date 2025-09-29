@@ -67,7 +67,7 @@ class AdaptiveAgentRequestHandler(BaseHTTPRequestHandler):
 def build_server(host: str = "0.0.0.0", port: int = 8080, *, config_path: Optional[Path] = None) -> Tuple[ThreadingHTTPServer, AdaptiveAgentEngine]:
     """Instantiate the HTTP server and the attached engine."""
     cfg = load_connectivity_config(config_path)
-    engine = AdaptiveAgentEngine(cfg["control_plane"])
+    engine = AdaptiveAgentEngine(cfg)
 
     handler = AdaptiveAgentRequestHandler
     handler.engine = engine

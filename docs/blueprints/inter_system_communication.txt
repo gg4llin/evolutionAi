@@ -41,6 +41,24 @@ message_bus_infrastructure:
         compression_type: "lz4"
         cleanup_policy: "delete"
 
+      job_events:
+        partitions: 6
+        retention_ms: 604800000  # 7 days
+        compression_type: "zstd"
+        cleanup_policy: "delete"
+
+      resource_updates:
+        partitions: 6
+        retention_ms: 604800000  # 7 days
+        compression_type: "snappy"
+        cleanup_policy: "compact"
+
+      worker_state_updates:
+        partitions: 4
+        retention_ms: 1209600000
+        compression_type: "lz4"
+        cleanup_policy: "delete"
+
   secondary_transport_layers:
     high_frequency_messaging:
       technology: "zeromq_with_curve_encryption"

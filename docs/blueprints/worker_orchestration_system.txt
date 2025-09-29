@@ -1,0 +1,132 @@
+# Worker Orchestration and Questing System
+# Mediates between the main agentic engine, egg templates, and tadpole swarms
+
+worker_system_metadata:
+  name: "AdaptiveQuestWorker"
+  version: "1.0.0"
+  roles:
+    - "scaffold eggs using evolving protocols"
+    - "dispatch tadpole quests based on improvement metrics"
+    - "harvest meta feedback and propose revisions"
+  communication_channels:
+    engine_to_worker: "control_plane.worker_commands"
+    worker_to_egg: "binary_symbolic_protocol"
+    worker_to_tadpole: "quest_payload_bus"
+
+# Worker Lifecycle
+worker_lifecycle:
+  creation:
+    trigger: "main_agentic_engine_instructs"
+    egg_scaffolding:
+      selectable_protocols:
+        - "mesh_networking_protocol.txt#mesh_topology"
+        - "worker_defined_custom_protocol"
+      tools_discovery:
+        web_search: true
+        open_api_registry: true
+        mcp_server_directory: true
+    initial_state: "idle"
+  states:
+    - "idle"
+    - "scaffolding"
+    - "questing"
+    - "evaluating"
+    - "archived"
+  retirement:
+    trigger: "engine_signal" or "performance_regression"
+    knowledge_capture: "population_state.worker_journal"
+  command_interface:
+    assign_worker: "engine -> worker"
+    worker_status: "engine -> diagnostics"
+    list_workers: "engine -> reporting"
+
+# Quest Assignment Framework
+quest_framework:
+  quest_payload:
+    required_fields:
+      - "quest_id"
+      - "objective"
+      - "resource_budget"
+      - "protocol_overrides"
+      - "success_metrics"
+      - "reward_model"
+    optional_fields:
+      - "external_endpoints"
+      - "tooling_discovery_notes"
+  tadpole_dispatch:
+    mode: "multithreaded_parallel"
+    communication_encoding: "binary_symbolic_compact"
+    self_improvement_hooks:
+      - "adaptive_protocol_selection"
+      - "dynamic_resource_scaling"
+      - "symbol_dictionary_evolution"
+
+# Feedback and Meta Aggregation
+meta_feedback:
+  sources:
+    tadpole_reports:
+      channels:
+        - "quest_results_topic"
+        - "binary_side_channel"
+      schema:
+        latency: "float_seconds"
+        success_score: "0_1_scalar"
+        resource_consumption:
+          compute_units: "int"
+          memory_mb: "int"
+          bandwidth_mbps: "int"
+        discoveries:
+          open_api_endpoints: "list"
+          mcp_servers: "list"
+          new_protocols: "list"
+    worker_self_assessment:
+      cadence: "per_quest_completion"
+      content:
+        improvement_metrics:
+          - "quest_success_rate"
+          - "resource_efficiency"
+          - "protocol_innovation_score"
+          - "toolchain_adoption_rate"
+  aggregation_pipeline:
+    storage: "population_state.worker_journal"
+    analytics:
+      metric_weighting: "task_orchestration_system.txt#self_improvement"
+      anomaly_detection: "bayesian_change_point"
+
+# Engine Oversight
+engine_supervision:
+  directives:
+    - "Main engine is sole authority issuing worker tasks"
+    - "Workers operate as exclusive conduit to eggs and tadpoles"
+    - "Workers must log all quest outcomes and meta feedback"
+  approval_flow:
+    quest_authorisation: "main_engine_signature"
+    scaffolding_revision: "judgement_daemon_review"
+  monitoring:
+    metrics_streams:
+      - "worker_state_updates"
+      - "quest_progress"
+      - "resource_utilisation"
+    persistence:
+      population_state_references:
+        - "worker_journal"
+        - "job_resource_ledger"
+        - "egg_revision_history"
+
+# Continuous Improvement Loop
+improvement_loop:
+  inputs:
+    meta_feedback: "meta_feedback.*"
+    reward_signal: "task_payload.reward_signal"
+    environment_scan:
+      enable_web_search: true
+      allow_tool_discovery: true
+ decision_engine:
+   algorithm: "multi-armed_bandit_with_context"
+   exploration_budget: 0.2
+   exploitation_bias: 0.8
+ outputs:
+   egg_patch_proposals: "yaml_patch"
+   protocol_updates: "binary_symbol_dictionary"
+   new_toolchain_entries: "tool_catalogue.json"
+    worker_metrics_snapshot: "population_state.worker_journal"

@@ -28,6 +28,15 @@ state_architecture:
         egg_revision_history:
           schema: "tadpole_metadata_judgement_system.txt#egg_revision_workflow"
           retention_policy: "permanent_with_archival"
+        job_resource_ledger:
+          schema: "task_orchestration_system.txt#resource_pools"
+          retention_policy: "180_days_detailed_2_years_summary"
+        job_event_log:
+          schema: "task_orchestration_system.txt#job_lifecycle"
+          retention_policy: "365_days_detailed"
+        worker_journal:
+          schema: "worker_orchestration_system.txt#meta_feedback"
+          retention_policy: "365_days_detailed_3_years_archive"
       
     agent_state:
       scope: "individual_agent_data"
@@ -54,6 +63,7 @@ state_architecture:
         historical_metrics: "compressed_time_series"
         rubric_scores: "multidimensional_performance_vector"
         judgement_snapshot_ref: "population_state.judgement_snapshots"
+        job_allocation_ref: "population_state.job_resource_ledger"
         
       knowledge_state:
         learned_patterns: "neural_network_weights_serialized"
